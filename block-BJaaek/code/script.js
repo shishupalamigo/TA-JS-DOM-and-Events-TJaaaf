@@ -36,7 +36,7 @@ function generateRandomColor() {
 
 firstBox.addEventListener("click", function() {
     firstBox.style.background = generateRandomColor();
-    console.log(generateRandomColor());
+    // console.log(generateRandomColor());
 });
 
 secondBox.addEventListener("mousemove", function() {
