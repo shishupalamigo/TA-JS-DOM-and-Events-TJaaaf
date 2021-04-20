@@ -1,0 +1,64 @@
+html {
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ol,
+ul {
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* CUSTOM STYLE */
+
+.heading {
+  text-align: center;
+  padding: 2rem;
+}
+main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.disco-grid {
+  display: flex;
+  flex-wrap: wrap;
+  width: 90%;
+  padding: 1rem;
+}
+.grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  font-weight: 900;
+  color: black;
+  width : 4rem;
+  height: 4rem;
+  border: 1px solid black;
+}
