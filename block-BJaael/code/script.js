@@ -13,16 +13,25 @@ function getRandomColor() {
 
 for (let i = 1; i <= 500; i++) {
     let grid = document.createElement("div");
-    grid.classList.add("grid"); 
+    grid.classList.add("grid");
+    let h3 = document.createElement("h3");
+    h3.innerText = getRandomNumber(1, 500);
+    
+    grid.append(h3);
     discoGrid.append(grid);
-    discoGrid.addEventListener("mousemove",  function () {
-        grid.style.background = getRandomColor();
-        grid.innerText =  getRandomNumber(1, 500);
-        grid.style.color = getRandomColor();
-    });
 };
 
+let allGrids = document.querySelectorAll(".grid");
 
+function handleMouseMove() {
+    allGrids.forEach((grid) => {
+        grid.style.background = getRandomColor();
+        grid.querySelector("h3").innerText = getRandomNumber(1, 500);
+        grid.style.color = getRandomColor();
+    });
+}
+
+discoGrid.addEventListener("mousemove",  handleMouseMove);
 
 
 
