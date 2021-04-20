@@ -33,3 +33,32 @@ img {
   max-width: 100%;
   height: auto;
 }
+
+/* CUSTOM STYLE */
+
+.heading {
+  text-align: center;
+  padding: 2rem;
+}
+main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.disco-grid {
+  display: flex;
+  flex-wrap: wrap;
+  width: 90%;
+  padding: 1rem;
+}
+.grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: beige;
+  width : 4rem;
+  height: 4rem;
+  border: 1px solid black;
+}
