@@ -39,7 +39,7 @@ function handleSubmit(event) {
         terms.innerText = 
         `👉: You Agree to Terms & conditions`;
     } else {
-        terms.innerText = "";
+        terms.innerText = "👉: You Do Not Agree to Terms & conditions";
     }
 
 
