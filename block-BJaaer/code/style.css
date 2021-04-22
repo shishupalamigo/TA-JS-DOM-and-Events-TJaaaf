@@ -91,3 +91,39 @@ input[type='text'] {
 .terms {
   display: inline-block;
 }
+
+.modal {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0%;
+  padding: 1rem;
+  background: #a5a4a7c9;
+}
+.close {
+  display: inline-block;
+  width: 100%; 
+  text-align: right;
+  cursor: pointer;
+  padding: 1rem;
+}
+.user-details  {
+  padding: 1rem 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  height: 50vh;
+  width: 60vw;
+  margin: auto auto;
+  background: white;
+  box-shadow: 5px 5px 12px rgb(85, 84, 84);
+}
+.user-details h1 {
+  font-style: 900;
+}
+.terms {
+  text-decoration: underline;
+}
+
