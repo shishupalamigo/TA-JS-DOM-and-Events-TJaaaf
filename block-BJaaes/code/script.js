@@ -22,13 +22,15 @@ let userNameElm = document.getElementById("user-name");
         userNameElm.nextElementSibling.innerText = inputError;
         userNameElm.nextElementSibling.style.color = "red";
     } else if (userNameElm.value.length < 4) {
-        userNameError = "User Name Can't be  Less than 4 Characters";
+        inputError = "User Name Can't be  Less than 4 Characters";
         userNameElm.classList.add("error");
         userNameElm.nextElementSibling.innerText = inputError;
         userNameElm.nextElementSibling.style.color = "red";
 
     } else {
         userNameElm.classList.add("success");
+        userNameElm.classList.remove("error");
+        inputError = "";
     }
 });
 
@@ -46,7 +48,9 @@ else if (checkForNumbers(nameElm.value)) {
     nameElm.nextElementSibling.innerText = inputError;
     nameElm.nextElementSibling.style.color = "red";
 } else {
-    nameElm.classList.add("success");   
+    nameElm.classList.add("success");
+    nameElm.classList.remove("error");
+    inputError = "";   
 }    
 });
 
@@ -69,12 +73,16 @@ if (emailElm.value === "") {
     emailElm.nextElementSibling.innerText = inputError;
     emailElm.nextElementSibling.style.color = "red";
 } else {
+    emailElm.classList.remove("error");
     emailElm.classList.add("success");
+    inputError = "";
 }
 });
 let phoneElm = document.getElementById("phone");
 phoneElm.addEventListener("blur", () => {
+    console.log('i am blurred');
     if (!allAreNumbers(phoneElm.value)) {
+        console.log('i am blurred error');
         inputError = "Phone number can only contain numbers";
         phoneElm.classList.add("error");
         phoneElm.nextElementSibling.innerText = inputError;
@@ -92,7 +100,9 @@ phoneElm.addEventListener("blur", () => {
         phoneElm.nextElementSibling.innerText = inputError;
         phoneElm.nextElementSibling.style.color = "red";
     } else {
+        phoneElm.classList.remove("error");
         phoneElm.classList.add("success");
+        inputError = "";
     }
 });
 
@@ -107,6 +117,8 @@ if (passwordElm.value === "") {
     passwordElm.nextElementSibling.style.color = "red";
 } else {
     passwordElm.classList.add("success");
+    passwordElm.classList.remove("error");
+    inputError = "";
 }
 });
 
@@ -125,14 +137,21 @@ else if (passwordElm.value !== confirmPasswordElm.value) {
 } else if (passwordElm.value === confirmPasswordElm.value) {
     
     confirmPasswordElm.classList.add("success");
+    confirmPasswordElm.classList.remove("error");
+    inputError = "";
+    passwordElm.classList.add("success");
 }
 });
+
+let allInputElements = document.querySelectorAll("input");
+
+function resetFields() {
+    allInputElements.forEach(input => input.value = '');
+}
 
 function handleSubmit(event) {
     event.preventDefault();
      
-    let allInputElements = document.querySelectorAll("input");
-
     let allInputsArray = Array.from(allInputElements);
 
     let success = allInputsArray.every(e => {
@@ -141,9 +160,11 @@ function handleSubmit(event) {
     
     if (success === true) {
         alert("User Added SucessFully");
-
+        resetFields();
     }
 }
+
+
 
 
 form.addEventListener("submit", handleSubmit);
@@ -160,4 +181,4 @@ form.addEventListener("submit", handleSubmit);
 // __ can't be less than __ characters (replace __ with field name)
 // You can't use number in the name field
 // Not a valid email
-// Phone number can only contain numbers
+// Phone number can only contain numbers    
