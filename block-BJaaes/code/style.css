@@ -1,0 +1,153 @@
+/* CSS Reset */
+
+html {
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ol,
+ul {
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* CUSTOM STYLES */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+body {
+    background: url("../code/assets/bg-intro-desktop.png"), 
+                linear-gradient(to right, #FA7978, #FA7978);            
+    background-size: cover;
+}
+/* CONTAINER */
+.container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 10em;
+}
+.flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+h1 {
+    font-size: 48px;
+    font-weight: 900;
+    padding-bottom: 1em;
+}
+ .text-container {
+     width: 30%;
+     color: #fff;
+ }
+ .text-container {
+     font-size: 18px;
+     font-weight: 600;
+ }
+ .form-container {
+     width: 60%;
+     padding: 2rem;
+ }
+ form {
+     background: #fff;
+     padding: 1em;
+     border-radius: 10px;
+     box-shadow: 0px 5px 3px #D66E6C;
+     text-align: center;
+ }
+ .form-control {
+   text-align: left;
+   padding: .5rem 1rem;
+ }
+ label {
+   padding: 1rem;
+ }  
+ input {
+     display: inline-block;
+     width: 100%;
+     margin-bottom: 1em;
+     padding: 1em;
+     border-radius: 12px;
+     border: 1px solid rgb(212, 212, 212);
+ }
+ button {
+     display: inline-block;
+     width: 100%;
+     padding: 1em;
+     border-radius: 12px;
+     color: #fff;
+     background: #49CC8A;
+     border: none;
+     box-shadow: 0px 5px 3px #49cc8a;
+     margin-bottom: .5em;
+     cursor: pointer;
+ }
+ .submit-btn {
+     text-decoration: none;
+     font-size: 16px;
+     color: #fff;
+ }
+ .success {
+   border: 2px solid green;
+ }
+ .error {
+   border: 2px solid red;
+ }
+
+
+ small {
+     font-size: 12px; 
+     font-weight: 100;
+     color: grey;
+ }
+ small a {
+     text-decoration: none;
+ }
+ .red {
+     font-weight: 500;
+     color: red;
+ }
+@media screen and (max-width: 760px) {
+  .container {
+    width: 100%;
+    padding: 0 1rem;
+  }
+  .content-section {
+    display: flex;
+    flex-direction: column;
+  }
+  .text-container {
+    width: 100%;
+  }
+
+  .form-container {
+    width: 100%;
+  }
+}
