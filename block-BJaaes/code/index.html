@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Form Validation 👇</title>
+  </head>
+  <body>
+    <main>
+      <section class="container flex content-section">
+          <article class="text-container">
+              <h1>Learn to code by Watching others</h1>
+              <p>
+                 See how experienced developers solve problems in real-time.
+                 Watching scripted tutorials is great, but understanding how 
+                 developers think is invaluable.  
+              </p>
+          </article>
+          <div class="form-container">
+              <form class="form">
+                  <div class="form-control">
+                    <label for="username">User Name:</label>
+                    <input
+                        id="user-name"
+                        type="text" 
+                        name="username" 
+                        placeholder="User Name"
+                    >
+                    <small></small>
+                  </div>
+                  <div class="form-control">
+                    <label for="name">Name:</label>
+                    <input
+                        id="name" 
+                        type="text" 
+                        name="name" 
+                        placeholder="Enter Your Name"
+                    >
+                    <small></small>   
+                  </div>
+
+                  <div class="form-control">
+                    <label for="email">Email:</label>
+                    <input
+                          id="email" 
+                          type="text" 
+                          name="email" 
+                          placeholder="abc@xyz.com"
+                    >
+                    <small></small>
+                  </div>
+                  <div class="form-control">
+                    <label fo r="phone">Phone No.:</label>
+                    <input
+                          id="phone" 
+                          type="text" 
+                          name="phone" 
+                          placeholder="1234567"
+                    >
+                    <small></small>
+                  </div>
+                  <div class="form-control">
+                  <label for="password">Password:</label>
+                    <input
+                        id="password" 
+                        type="password" 
+                        name="password" 
+                        placeholder="Password"
+                    >
+                    <small></small>
+                  </div>
+                  <div class="form-control">
+                    <label for="confirmPassword">Confirm-Password:</label>
+                    <input
+                        id="confirm-password" 
+                        type="password" 
+                        name="confirmPassword" 
+                        placeholder="Confirm Password"
+                    >
+                    <small></small>
+                  </div>
+
+                  <button 
+                        type="submit" 
+                        class="submit-btn"
+                  >
+                          Create Account
+                  </button>
+                  <small>By clicking the button, you are agreeing to our 
+                      <a href="#">
+                          <strong class="red">Terms and Services</strong>
+                      </a>
+                  </small>              
+              </form>
+          </div>
+      </section>
+  </main>
+    <script src="./script.js"></script>
+  </body>
+</html>
