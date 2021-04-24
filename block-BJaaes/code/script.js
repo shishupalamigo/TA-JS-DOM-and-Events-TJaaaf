@@ -1,5 +1,7 @@
 let form = document.querySelector("form");
 
+let userInfo = {};
+
 let inputError = "";
 
 function checkForNumbers(str) {
@@ -31,6 +33,8 @@ let userNameElm = document.getElementById("user-name");
         userNameElm.classList.add("success");
         userNameElm.classList.remove("error");
         inputError = "";
+        userNameElm.nextElementSibling.innerText = inputError;
+        
     }
 });
 
@@ -50,7 +54,8 @@ else if (checkForNumbers(nameElm.value)) {
 } else {
     nameElm.classList.add("success");
     nameElm.classList.remove("error");
-    inputError = "";   
+    inputError = "";
+    nameElm.nextElementSibling.innerText = inputError;   
 }    
 });
 
@@ -75,14 +80,13 @@ if (emailElm.value === "") {
 } else {
     emailElm.classList.remove("error");
     emailElm.classList.add("success");
+    emailElm.nextElementSibling.innerText = inputError;
     inputError = "";
 }
 });
 let phoneElm = document.getElementById("phone");
 phoneElm.addEventListener("blur", () => {
-    console.log('i am blurred');
     if (!allAreNumbers(phoneElm.value)) {
-        console.log('i am blurred error');
         inputError = "Phone number can only contain numbers";
         phoneElm.classList.add("error");
         phoneElm.nextElementSibling.innerText = inputError;
@@ -103,6 +107,7 @@ phoneElm.addEventListener("blur", () => {
         phoneElm.classList.remove("error");
         phoneElm.classList.add("success");
         inputError = "";
+        phoneElm.nextElementSibling.innerText = inputError;
     }
 });
 
@@ -119,6 +124,7 @@ if (passwordElm.value === "") {
     passwordElm.classList.add("success");
     passwordElm.classList.remove("error");
     inputError = "";
+    passwordElm.nextElementSibling.innerText = inputError;
 }
 });
 
@@ -134,25 +140,35 @@ else if (passwordElm.value !== confirmPasswordElm.value) {
     confirmPasswordElm.classList.add("error");
     confirmPasswordElm.nextElementSibling.innerText = inputError;
     confirmPasswordElm.nextElementSibling.style.color = "red";
+
 } else if (passwordElm.value === confirmPasswordElm.value) {
     
     confirmPasswordElm.classList.add("success");
     confirmPasswordElm.classList.remove("error");
     inputError = "";
+    confirmPasswordElm.nextElementSibling.innerText = inputError;
+    passwordElm.nextElementSibling.innerText = inputError;
     passwordElm.classList.add("success");
+    passwordElm.classList.remove("error");
 }
 });
 
 let allInputElements = document.querySelectorAll("input");
 
+let allInputsArray = Array.from(allInputElements);
+
 function resetFields() {
     allInputElements.forEach(input => input.value = '');
+    allInputElements.forEach(input => input.classList.remove("success"));
 }
 
 function handleSubmit(event) {
-    event.preventDefault();
-     
-    let allInputsArray = Array.from(allInputElements);
+    event.preventDefault();         
+
+    allInputsArray.reduce((acc, cv) => {
+        acc[cv.name] = cv.value;
+        return acc;
+    }, userInfo);
 
     let success = allInputsArray.every(e => {
         return e.classList.contains("success"); 
@@ -161,12 +177,9 @@ function handleSubmit(event) {
     if (success === true) {
         alert("User Added SucessFully");
         resetFields();
+        console.log(userInfo);
     }
 }
-
-
-
-
 form.addEventListener("submit", handleSubmit);
 
 // Username can't be less than 4 characters
