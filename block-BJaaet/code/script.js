@@ -4,38 +4,33 @@ const form = document.querySelector("form");
 let movieInput = document.querySelector("#movie"); 
 let rootElm = document.querySelector(".list"); 
 
-let allmovies = [
-    {
-        name: "Forrest Gump",
-        watched: false
-    },
-    {
-        name: "Inception",
-        watched: true
-    }       
-];
+let allmovies = JSON.parse (localStorage.getItem("movies")) || [];   
+
 
 function submitHandler(event) {
     event.preventDefault()
-    
-    allmovies.push({
+    let movie = {
         name: movieInput.value,
         watched: false
-    });
+    }
+    allmovies.push(movie);
     // console.log(allmovies);
     createMovieUI();
     movieInput.value = "";
- 
+  
+    localStorage.setItem("movies", JSON.stringify(allmovies));
 }
 function deleteMovie(event) {
     let id = event.target.dataset.id;
     allmovies.splice(id, 1);
     createMovieUI();
+    localStorage.setItem("movies", JSON.stringify(allmovies));
 }
 
 function handleChange(event) {
    let id = event.target.id;
    allmovies[id].watched = !allmovies[id].watched;
+   localStorage.setItem("movies", JSON.stringify(allmovies));
 }
 
 form.addEventListener("submit", submitHandler);
