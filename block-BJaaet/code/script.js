@@ -22,7 +22,7 @@ function submitHandler(event) {
         name: movieInput.value,
         watched: false
     });
-    console.log(allmovies);
+    // console.log(allmovies);
     createMovieUI();
     movieInput.value = "";
  
@@ -36,7 +36,6 @@ function deleteMovie(event) {
 function handleChange(event) {
    let id = event.target.id;
    allmovies[id].watched = !allmovies[id].watched;
-   console.log(allmovies[id].watched);
 }
 
 form.addEventListener("submit", submitHandler);
