@@ -1,152 +1,195 @@
 function main() {
-const main = document.querySelector(".main");
-let todoInput = document.querySelector("#input"); 
-let rootElm = document.querySelector(".list"); 
+  const main = document.querySelector(".main");
+  let todoInput = document.querySelector("#input");
+  let rootElm = document.querySelector(".list");
 
-let leftItems = document.querySelector(".left-items")
-let allItems = document.querySelector(".all-items");
-let activeItems = document.querySelector(".active-items");
-let completedItems = document.querySelector(".completed-items");
-let clearAll = document.querySelector(".clear-all");
-let leftItemsCount = document.querySelector(".count"); 
+  let allItems = document.querySelector(".all-items");
+  let activeItems = document.querySelector(".active-items");
+  let completedItems = document.querySelector(".completed-items");
+  let clearCompleted = document.querySelector(".clear-completed");
+  let leftItemsCount = document.querySelector(".count");
 
-let allTodos = JSON.parse (localStorage.getItem("todos")) || [];   
+  let allTodos = JSON.parse(localStorage.getItem("todos")) || [];
 
-function filterActive() {
-    let allTodoLeft = []; 
-    allTodos.filter (todo => {
-        if (todo.isDone === false) {
-            allTodoLeft.push(todo);
-        }
+  let buttonMode = 'allItems';
+  function updateActiveButton(btn = "allItems") {
+    allItems.classList.remove("selected");
+    activeItems.classList.remove("selected");
+    completedItems.classList.remove("selected");
+
+    buttonMode = btn;
+    if (btn === "allItems") {
+      allItems.classList.add("selected");
+    } else if (btn === "activeItems") {
+      activeItems.classList.add("selected");
+    } else if (btn === "completedItems") {
+      completedItems.classList.add("selected");
+    }
+  }
+  updateActiveButton();
+
+  function filterActive() {
+    let allTodoLeft = [];
+    allTodos.filter((todo) => {
+      if (todo.isDone === false) {
+        allTodoLeft.push(todo);
+      }
     });
-   return createUI(allTodoLeft);
-}
+    updateActiveButton("activeItems");
+    return createUI(allTodoLeft);
+  }
 
-function count() {
-    let allTodoLeft = []; 
-    allTodos.filter (todo => {
+  function count() {
+    let allTodoLeft = [];
+
+    allTodos.filter((todo) => {
         if (todo.isDone === false) {
-            allTodoLeft.push(todo);
+          allTodoLeft.push(todo);
         }
-    });
-   return allTodoLeft.length;
-}
-leftItemsCount.innerText=  count();
+      });
+    
+    return allTodoLeft.length;
+  }
 
-function filterCompleted() {
+  leftItemsCount.innerText =
+    count() + ` ${+count() < 2 ? "item" : "items"} left`;
+
+  function filterCompleted() {
     let completedTodos = [];
-    allTodos.filter(todo => {
-        if (todo.isDone === true) {
-            completedTodos.push(todo);
-        }
+    allTodos.filter((todo) => {
+      if (todo.isDone === true) {
+        completedTodos.push(todo);
+      }
     });
-   return createUI(completedTodos);
-}
+    updateActiveButton("completedItems");
+    return createUI(completedTodos);
+  }
 
-function allTodosFilter() {
+  function allTodosFilter() {
+    updateActiveButton();
     createUI(allTodos);
-}
+  }
 
-
-function inputHandler(event) {
-    event.preventDefault()
+  function inputHandler(event) {
+    event.preventDefault();
     let todo = {
-        name: event.target.value,
-        isDone: false
-    }
+      name: event.target.value,
+      time: Date.now(),
+      isDone: false,
+    };
     if (event.keyCode === 13 && event.target.value !== "") {
-        allTodos.push(todo);
-        // console.log(allTodos);
-        createUI(allTodos);
-        todoInput.value = "";
+      allTodos.push(todo);
+      createUI(allTodos);
+      todoInput.value = "";
+      let leftTodoCount = allTodos.filter(todo => !todo.isDone).length;
+      leftItemsCount.innerText = `${
+        leftTodoCount + ` ${+leftTodoCount < 2 ? "item" : "items"} left`
+      } `;
+      localStorage.setItem("todos", JSON.stringify(allTodos));
     }
-    let leftTodoCount = allTodos.length;
-    leftItemsCount.innerText = `${leftTodoCount}`;
-    localStorage.setItem("todos", JSON.stringify(allTodos));
-}
-function deleteTodo(event) {
-    let id = event.target.dataset.id;
-    allTodos.splice(id, 1);
+  }
+  function deleteTodo(id) {
+    const remainingTodo = allTodos.filter(todo => todo.time !== id);
+    createUI(remainingTodo);
+    allTodos = remainingTodo;
+    leftItemsCount.innerText =
+      count() + ` ${+count() < 2 ? "item" : "items"} left`;
+
+    localStorage.setItem("todos", JSON.stringify(remainingTodo));
+  }
+  function deleteCompletedTodo() {
+    allTodos = allTodos.filter((todo) => !todo.isDone);
     createUI(allTodos);
-    leftItemsCount.innerText = count();
+    leftItemsCount.innerText =
+      count() + ` ${+count() < 2 ? "item" : "items"} left`;
     localStorage.setItem("todos", JSON.stringify(allTodos));
-}
-function deleteAllTodo() {
-    allTodos.splice(0, allTodos.length);
+    updateActiveButton();
+  }
+
+  function handleChange(event) {
+    let todoId = event.target.id;
+    const currentTodo = allTodos.find(todo => todo.time === +todoId);
+    currentTodo.isDone = !currentTodo.isDone;
+
+    leftItemsCount.innerText =
+      count() + ` ${+count() < 2 ? "item" : "items"} left`;
+
+    localStorage.setItem("todos", JSON.stringify(allTodos));
     createUI(allTodos);
-    leftItemsCount.innerText = count();
-    localStorage.setItem("todos", JSON.stringify(allTodos));
-}
+  }
 
-function handleChange(event) {
-   let id = event.target.id;
-   allTodos[id].isDone = !allTodos[id].isDone;
-   
-   leftItemsCount.innerText = count();
-   localStorage.setItem("todos", JSON.stringify(allTodos));
-}
+  todoInput.addEventListener("keyup", inputHandler);
 
-
-todoInput.addEventListener("keyup", inputHandler);
-
-function createUI(allTodos) {
+  function createUI(allTodos = []) {
     rootElm.innerHTML = "";
+    let allTodoLeft = [];
 
-  allTodos &&  allTodos.forEach((todo, i) => {
+    if(buttonMode === 'allItems') {
+        allTodoLeft = allTodos;
+    } else if(buttonMode === 'activeItems') {
+        allTodos.filter(todo => !todo.isDone && allTodoLeft.push(todo));
+    } else if(buttonMode === 'completedItems') {
+        allTodos.filter(todo => todo.isDone && allTodoLeft.push(todo));
+    }
+
+    allTodoLeft.forEach((todo, i) => {
         let li = document.createElement("li");
         li.classList.add("list-items");
         let label = document.createElement("label");
-        label.for = i;
+        label.for = todo.time;
         let checkbox = document.createElement("input");
         checkbox.type = "checkbox";
-        checkbox.id = i;
-        checkbox.checked = todo.isDone; 
+        checkbox.id = todo.time;
+        checkbox.checked = todo.isDone;
         checkbox.classList.add("checkbox");
         checkbox.addEventListener("change", handleChange);
+        label.append(checkbox);
 
         let span = document.createElement("span");
         span.classList.add("todo-name");
-        span.innerText= todo.name;
-        span.id = i;
-        label.append(checkbox, span);
+        span.innerText = todo.name;
+        span.id = todo.time;
+        todo.isDone ? span.style.color = "lightgreen" : "";
+        
         span.addEventListener("dblclick", (event) => {
-            let updateInput = document.createElement("input");
-                updateInput.classList.add("update-box");
-                updateInput.type = "text";
-                updateInput.value = span.innerText;
-                span.style.display = "none";
-                label.append(updateInput); 
-                updateInput.addEventListener("keyup", (event) =>  {
-                if (event.keyCode === 13) {
-                    span.innerText = event.target.value;
-                    span.style.display = "inline";
-                    updateInput.style.display = "none";
-                    todo.name = event.target.value;
-                    createUI(allTodos);
-                    localStorage.setItem("todos", JSON.stringify(allTodos)); 
-                }
-                
-            });
-        })
+          let updateInput = document.createElement("input");
+          updateInput.classList.add("update-box");
+          updateInput.type = "text";
+          updateInput.value = span.innerText;
+          span.style.display = "none";
+          label.append(updateInput);
+          updateInput.addEventListener("keyup", (event) => {
+            if (event.keyCode === 13) {
+              span.innerText = event.target.value;
+              span.style.display = "inline";
+              updateInput.style.display = "none";
+              todo.name = event.target.value;
+              createUI(allTodos);
+              localStorage.setItem("todos", JSON.stringify(allTodos));
+            }
+          });
+        });
 
+       
         let closeSpan = document.createElement("span");
         closeSpan.innerText = "❌";
         closeSpan.classList.add("close");
-        closeSpan.setAttribute("data-id", i);
-    
-        li.append(label, closeSpan);
+        closeSpan.setAttribute("data-id", todo.time);
+
+        li.append(label, span, closeSpan);
         rootElm.append(li);
 
-        closeSpan.addEventListener("click", deleteTodo);      
-       });
-    }
-    
-    createUI(allTodos);
-        
-    allItems.addEventListener("click", allTodosFilter)
-    activeItems.addEventListener("click", filterActive);    
-    clearAll.addEventListener("click", deleteAllTodo);
-    completedItems.addEventListener("click", filterCompleted);
+        closeSpan.addEventListener("click", () => deleteTodo(todo.time));
+      });
+  }
 
-};
+  createUI(allTodos);
+
+  allItems.addEventListener("click", allTodosFilter);
+  activeItems.addEventListener("click", filterActive);
+  clearCompleted.addEventListener("click", deleteCompletedTodo);
+  completedItems.addEventListener("click", filterCompleted);
+
+}
+
 main();

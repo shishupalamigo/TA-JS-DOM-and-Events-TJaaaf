@@ -134,7 +134,7 @@ h1 {
 .sum-span {
     display: inline-block;
     font-size: .75rem;
-    font-weight: 200;
+    font-weight: 500;
     color: rgb(143, 136, 136);
     border: .15px solid rgb(233, 222, 222);
     padding: .25rem;
@@ -147,4 +147,10 @@ h1 {
     padding: .5rem;
     font-size: 1rem;
     margin-left: 1rem;
+}
+.selected {
+    background: black;
+    color: #fff;
+    border: 1px solid rgb(212, 202, 202);
+    box-shadow: 2px 4px 8px rgb(112, 111, 111);
 }
