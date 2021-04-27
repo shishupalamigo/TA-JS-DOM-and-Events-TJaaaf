@@ -150,10 +150,13 @@ function main() {
         span.innerText = todo.name;
         span.id = todo.time;
         todo.isDone ? span.style.color = "lightgreen" : "";
+        todo.isDone ? span.style.textDecoration = "line-through 1px rgb(2, 32, 37)" : "";
         
         span.addEventListener("dblclick", (event) => {
           let updateInput = document.createElement("input");
           updateInput.classList.add("update-box");
+          todo.isDone ? updateInput.style.color = "lightgreen" : "";
+          todo.isDone ? span.style.textDecoration = "line-through 1px rgb(2, 32, 37)" : "";
           updateInput.type = "text";
           updateInput.value = span.innerText;
           span.style.display = "none";
