@@ -10,13 +10,13 @@ function main() {
   let activeHouse = "";
 
   let search = document.querySelector("#search");
-  search.addEventListener("keyup", (event) => {
-    if (event.target.value !== "" && event.keyCode === 13) {
-      peopleWithName = allPeople.filter((people) =>
-        people.name
-          .toLocaleLowerCase()
-          .includes(event.target.value.toLocaleLowerCase())
-      );
+  search.addEventListener("input", (event) => { 
+      if (event.target.value !== "") {
+        peopleWithName = allPeople.filter((people) =>
+          people.name
+            .toLocaleLowerCase()
+            .includes(event.target.value.toLocaleLowerCase())
+        );
       if (peopleWithName.length === 0) {
         alert(`No Character Found With the Name "${event.target.value}".`);
         event.target.value = "";
