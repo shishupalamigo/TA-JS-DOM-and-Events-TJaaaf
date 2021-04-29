@@ -30,6 +30,8 @@ body {
   font-size: 2rem;
   color: antiquewhite;
   cursor: pointer;
+  border: 1px solid grey;
+  padding: .5rem;
 }
 .reset:hover {
   transform: scale(1.2);
@@ -56,8 +58,8 @@ body {
 .card,
 .back,
 .front {
-  height: 150px;
-  width: 150px;
+  height: 100px;
+  width: 100px;
 }
 
 .back,
@@ -86,4 +88,6 @@ body {
   border: 0px;
   background: rgb(4, 44, 2) url("../media/celebrate.gif") no-repeat center center /
   contain !important;
+  cursor: not-allowed;
+  transform: none !important;
 }
