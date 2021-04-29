@@ -54,7 +54,7 @@ const game = document.getElementById("game");
 
 const grid = document.createElement("section");
 grid.classList.add("grid");
-
+// game.addEventListener("click", secCount);
 game.appendChild(grid);
 // DOUBLE ARREY
 
@@ -68,7 +68,7 @@ gameGrid.sort(() => 0.5 - Math.random());
 
 gameGrid.forEach((item) => {
   const card = document.createElement("div");
-  card.classList.add("card");
+  card.classList.add(`card`,`${item.name}`);
   card.dataset.name = item.name;
   const front = document.createElement("div");
   front.classList.add("front");
@@ -98,7 +98,8 @@ function secCount() {
   min = Math.floor(sec / 60);
   document.querySelector(".min-count").innerText = min;
 }
-secCount();
+var timeStarted = false;
+// secCount();
 
 // RESET ALL
 let reset = document.querySelector(".reset");
@@ -138,7 +139,9 @@ const resetGuesses = () => {
 // GAME LOGICS
 
 grid.addEventListener("click", function (event) {
-  let clicked = event.target;
+  !timeStarted && secCount();
+  timeStarted = true;
+  let clicked = event.target;  
   attemptCount++;
   attempts.innerText = attemptCount;
   if (
@@ -168,6 +171,10 @@ grid.addEventListener("click", function (event) {
         // resetGuesses();
         setTimeout(match, delay);
         setTimeout(resetGuesses, delay);
+        var matched = document.querySelectorAll(`.${firstGuess}`);
+        matched.forEach(node => node.addEventListener('click',function (e) {   
+          e.stopPropagation();
+        }))
       } else {
         setTimeout(resetGuesses, delay);
       }
