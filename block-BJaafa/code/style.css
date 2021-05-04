@@ -1,19 +1,20 @@
+
 html {
     font-family: "Montserrat", sans-serif;
     font-size: 10px;
-    /* background: #2d3740; */
   }
-  
+*, *::after,
+*::before {
+    box-sizing: border-box;
+}  
   body {
     padding: 1rem;
     background: #1c262f;
     color: rgb(230, 225, 225);
-    /* width: 90%; */
     margin: 0 auto;
   }
   .main-content {
     display: flex;
-    justify-content: space-between;
     width: 80vw;
     margin: 0 auto;
   }
@@ -24,18 +25,27 @@ html {
   form {
     text-align: center;
   }
+  .form {
+    flex-grow: 1;
+    border-right: 2px solid #fff;
+  }
+  .entries-container {
+      padding-left: 3rem;
+  }
   label {
     font-size: 1.8rem;
   }
   
-  input[type="number"] {
+  #entry {
     font-family: inherit;
     background: rgb(230, 225, 225);
     width: 80%;
     margin: 1rem 0;
-    padding: 0.8rem 0;
+    padding: 1rem 0;
     border: none;
-    font-size: 1.2rem;
+    outline: none;
+    border-radius: 20px;
+    font-size: 1.5rem;
     text-align: center;
   }
   
@@ -49,6 +59,10 @@ html {
     border-radius: 50%;
     background: #16b1cc;
     margin: 0.5rem 0 1rem 0;
+    cursor: pointer;
+  }
+  button:hover {
+      transform: scale(1.1);
   }
   .daysTitle {
     font-size: 2.5rem;
@@ -66,7 +80,12 @@ html {
   }
   #goalInput {
     width: 20%;
-  
+    border: none;
+    outline: none;
+    border-radius: 20px;
+    padding: 1.5rem;
+    font-size: 1.6rem;
+    margin: 1rem 0;
   }
   ul {
     padding: 0;
@@ -137,15 +156,5 @@ html {
   svg {
       max-width: 60%;
   }
-  
-  @media screen and (min-width: 800px) {
-  
-    input[type="number"] {
-      width: 40%;
-    }
-  
-    svg {
-      max-width: 50%;
-    }
-  }
+   
   
