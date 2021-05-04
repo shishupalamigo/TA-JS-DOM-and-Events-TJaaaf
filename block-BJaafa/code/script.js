@@ -1,31 +1,38 @@
-let goal = 0;
+let goal  = 0;
+JSON.parse(localStorage.getItem('goal')) || 0;
+
+let entries = [0, 0, 0, 0, 0, 0, 0];
+
+JSON.parse(localStorage.getItem("entries"));
+
+
 let goalInput = document.getElementById("goalInput");
 goalInput.addEventListener("keyup", (event) => {
-  if (event.keyCode === 13) {
+  if (event.keyCode === 13 && goal === 0) {
     goal = goalInput.value;
+    localStorage.setItem('goal', JSON.stringify(goal));
+    document.querySelector("#target").innerText = goal;
+    goalInput.value = "";
+  } else {
+    goalInput.removeEventListener("keyup", () => {
+        alert("You have Already added the Goal for this week");
+    });
   }
 });
 
 const enteriesWrapper = document.querySelector("#entries");
-document.querySelector("#target").innerText = goal;
 
-function addNewEntry(newEntry) {
-  enteriesWrapper.removeChild(enteriesWrapper.firstElementChild);
-  const listItem = document.createElement("li");
-  const listValue = document.createTextNode(newEntry.toFixed(1));
-  listItem.append(listValue);
-  enteriesWrapper.append(listItem);
+function createUI() {
+  enteriesWrapper.innerHTML = "";
+  localStorage.setItem("entries", JSON.stringify(entries));
+  entries.forEach(element => {
+     let inputBox = document.createElement("li");
+     inputBox.innerText = element;
+     enteriesWrapper.append(inputBox);
+  });  
 }
+createUI();
 
-function resetEntries() {
-  enteriesWrapper.innerHTML = `<li>-</li>
-  <li>-</li>
-  <li>-</li>
-  <li>-</li>
-  <li>-</li>
-  <li>-</li>
-  <li>-</li>`
-}
 
 function reducer(total, currentValue) {
   return total + currentValue;
@@ -33,8 +40,12 @@ function reducer(total, currentValue) {
 
 function calcTotal(entries) {
   const totalValue = entries.reduce(reducer, 0).toFixed(1);
+  console.log(totalValue,"total value")
   document.getElementById("total").innerText = totalValue;
   document.getElementById("progressTotal").innerText = totalValue;
+  // if (totalValue >= goal) {
+  //     alert("Congratulations on achieving your goal! Keep It up!")
+  // }
 }
 
 function calcAverage(entries) {
@@ -60,19 +71,28 @@ function calcGoal(entries) {
 
 function handleSubmit(event) {
   event.preventDefault();
-  let entries = JSON.parse(localStorage.getItem('entries')) || [];
+  // let entries = JSON.parse(localStorage.getItem('entries')) || [];
   const entry = Number(document.querySelector("#entry").value);
-  if (!entry) return;
-  document.querySelector("form").reset();
-  if (entries.length < 7) {
-    entries.push(entry);
-    addNewEntry(entry);
-  } else {
-    alert("You have completed the weekly run!");
-    entries = []; 
-    resetEntries();
+  if (goal === 0 ) {
+      alert("set the weekly goal first!");
   }
+  if (!entry || entry < 0 ) return;
+
+  entries.unshift(entry);
+  entries.pop();
+  localStorage.setItem("entries", JSON.stringify(entries));
+  console.log(entries);    
+  document.querySelector("form").reset();
+  // if (entries.length < 7) {
+  //   // entries.push(entry);
+  //   // addNewEntry(entry);
+  // } else {
+  //   alert("You have completed the weekly run!");
+  //   // entries = []; 
+  //   // resetEntries();
+  // }
   localStorage.setItem('entries', JSON.stringify(entries));
+  createUI();
   calcTotal(entries);
   calcAverage(entries);
   weeklyHigh(entries);
