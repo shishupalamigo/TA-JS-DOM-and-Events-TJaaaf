@@ -1,0 +1,9 @@
+{
+    "name" : "TODO APPlication",
+    "description" : "Maintain a list of what you have to do in coming days.",
+    "version" : "1.0.0",
+    "manifest_version": 2,
+    "chrome_url_overrides" : {
+        "newtab" : "index.html"
+    }         
+}

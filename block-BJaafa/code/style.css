@@ -1,0 +1,160 @@
+
+html {
+    font-family: "Montserrat", sans-serif;
+    font-size: 10px;
+  }
+*, *::after,
+*::before {
+    box-sizing: border-box;
+}  
+  body {
+    padding: 1rem;
+    background: #1c262f;
+    color: rgb(230, 225, 225);
+    margin: 0 auto;
+  }
+  .main-content {
+    display: flex;
+    width: 80vw;
+    margin: 0 auto;
+  }
+  .logo {
+    text-align: center;
+  }
+  
+  form {
+    text-align: center;
+  }
+  .form {
+    flex-grow: 1;
+    border-right: 2px solid #fff;
+  }
+  .entries-container {
+      padding-left: 3rem;
+  }
+  label {
+    font-size: 1.8rem;
+  }
+  
+  #entry {
+    font-family: inherit;
+    background: rgb(230, 225, 225);
+    width: 80%;
+    margin: 1rem 0;
+    padding: 1rem 0;
+    border: none;
+    outline: none;
+    border-radius: 20px;
+    font-size: 1.5rem;
+    text-align: center;
+  }
+  
+  button {
+    font-family: inherit;
+    font-size: 1.4rem;
+    font-weight: bolder;
+    width: 80px;
+    height: 80px;
+    border: none;
+    border-radius: 50%;
+    background: #16b1cc;
+    margin: 0.5rem 0 1rem 0;
+    cursor: pointer;
+  }
+  button:hover {
+      transform: scale(1.1);
+  }
+  .daysTitle {
+    font-size: 2.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #fff;
+  }
+  
+  .goal-set {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+    margin: auto auto;
+  }
+  #goalInput {
+    width: 20%;
+    border: none;
+    outline: none;
+    border-radius: 20px;
+    padding: 1.5rem;
+    font-size: 1.6rem;
+    margin: 1rem 0;
+  }
+  ul {
+    padding: 0;
+    display: flex;
+    list-style: none;
+    justify-content: space-between;
+  }
+  
+  li {
+    border: 1px solid;
+    padding: 1rem 1.5rem;
+  }
+  
+  .enteriesWrapper {
+    padding: 1rem 0;
+    font-size: 1.6rem;
+    width: 50%;
+  }
+  .enteriesWrapper h3 {
+    margin: 0;
+    text-align: center;
+    font-weight: lighter;
+  }
+  
+  .data {
+    font-size: 1.4rem;
+  }
+  
+  .data div {
+    background: #141c22;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0.5rem 0;
+    padding: 0 1rem;
+  }
+  
+  .progress {
+    text-align: center;
+    padding-bottom: 1rem;
+  }
+  .progress h3 {
+    font-size: 1.6rem;
+    font-weight: lighter;
+  }
+  
+  .progressCircleWrapper {
+    display: flex;
+    justify-content: center;
+  }
+  
+  #progressCircle {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    /* background: conic-gradient(#70db70 50%, #2d3740 50%); */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  #progressCenter {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    background: #1c262f;
+  }
+  svg {
+      max-width: 60%;
+  }
+   
+  
